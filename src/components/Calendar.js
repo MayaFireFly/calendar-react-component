@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import './Calendar.css';
 
 const Calendar = () => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -26,7 +27,7 @@ const Calendar = () => {
         const daysArr = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
         const days = [];
         for(let i = 0; i < daysArr.length; i++){
-            days.push(<div key={i + '_dw'} style={{width:'calc(100%/7)'}}>{daysArr[i]}</div>);
+            days.push(<div key={i + '_dw'} className='calendar-col'>{daysArr[i]}</div>);
         }
         return days;
     };
@@ -45,7 +46,7 @@ const Calendar = () => {
         if(dayOfStartMonth > 0){                                //1 - Monday                           
             const row = [];            
             for(let i = 0; i < dayOfStartMonth - 1; i++){                               
-                const cell = <div key={i + '_db'} style={{width:'calc(100%/7)'}}></div>;
+                const cell = <div key={i + '_db'} className='calendar-col'></div>;
                 row.push(cell);
             }
             return row;
@@ -53,7 +54,7 @@ const Calendar = () => {
         }else if(dayOfStartMonth === 0){                        //0 - Saturday
             const row = [];            
             for(let i = 0; i < 6; i++){                         //6 days of week                              
-                const cell = <div key={i + '_db'} style={{width:'calc(100%/7)'}}></div>;
+                const cell = <div key={i + '_db'} className='calendar-col'></div>;
                 row.push(cell);
             }
             return row;
@@ -64,11 +65,9 @@ const Calendar = () => {
         const number = elem.innerHTML;
         const elemCollection = elem.parentNode.children;
         for(let i = 0; i < elemCollection.length; i++){
-            elemCollection[i].style.backgroundColor = 'white';
-            elemCollection[i].style.color = 'black';
+            elemCollection[i].classList.remove('cell-active');            
         }
-        elem.style.backgroundColor = 'blue';
-        elem.style.color = 'white';        
+        elem.classList.add('cell-active');        
         setSelectedDate(daysAll[number-1]);        
     };
 
@@ -86,7 +85,7 @@ const Calendar = () => {
             for(let i = 0; i < daysInWeek; i++){    
                 let cell;                
                 if (daysAll[day].getDay() === i){                    
-                    cell = <div key={day + '_dm'} style={{width:'calc(100%/7)', cursor:'pointer'}} onClick={(e)=>onDateClick(e.target, daysAll)}>{daysAll[day].getDate()}</div>;                    
+                    cell = <div key={day + '_dm'} className='calendar-col clickable' onClick={(e)=>onDateClick(e.target, daysAll)}>{daysAll[day].getDate()}</div>;                    
                 }
                 row.push(cell);         
             }
@@ -98,28 +97,28 @@ const Calendar = () => {
         return days;
     };
 
-    return <div style={{maxWidth:'10em', height:'auto', fontWeight:'normal', margin:'1em auto'}}>
-    <div style={{color:'black', fontWeight:'bolder', textAlign:'center', margin:'0', padding:'0', display:'flex', flexDirection:'row', flexWrap:'wrap', width:'100%'}}>
+    return <div className='calendar-wrapper'>
+    <div className='calendar-row calendar-text'>
 
-        <div style={{margin:'0', padding:'0', display:'flex', flexDirection:'row', flexWrap:'wrap', width:'100%'}}>
-            <div onClick={prevMonth} style={{cursor:'pointer', width:'30%'}}>
-              <span style={{display:'inline-block', width:'1.5em', height:'1.5em', borderTop:'1px solid #000', borderRight:'1px solid #000', transform:'rotate(225deg)'}}></span>
+        <div className='calendar-row'>
+            <div onClick={prevMonth} className='clickable w-30'>
+              <span className='arrow arrow-left'></span>
             </div>
-            <div style={{width:'40%'}}>{textMonth(currentMonth.getMonth())} {currentMonth.getFullYear()}</div>
-            <div onClick={nextMonth} style={{cursor:'pointer', width:'30%'}}>
-              <span style={{display:'inline-block', width:'1.5em', height:'1.5em', borderTop:'1px solid #000', borderRight:'1px solid #000', transform:'rotate(45deg)'}}></span>
+            <div className='w-40'>{textMonth(currentMonth.getMonth())} {currentMonth.getFullYear()}</div>
+            <div onClick={nextMonth} className='clickable w-30'>
+              <span className='arrow arrow-right'></span>
             </div> 
         </div> 
 
-        <div style={{margin:'0', padding:'0', display:'flex', flexDirection:'row', flexWrap:'wrap', width:'100%'}}>
+        <div className='calendar-row'>
             {renderDaysOfWeek()}
         </div>
 
-        <div style={{margin:'0', padding:'0', display:'flex', flexDirection:'row', flexWrap:'wrap', width:'100%'}}>
+        <div className='calendar-row'>
             {renderDays()}
         </div>
 
-        <div style={{margin:'1em 0', padding:'0', display:'flex', flexDirection:'row', flexWrap:'wrap', width:'100%', fontSize:'.8em'}}>
+        <div className='calendar-row' style={{margin:'1em 0', fontSize:'.8em'}}>
             {selectedDate.toString()}
         </div>
 

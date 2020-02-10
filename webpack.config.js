@@ -10,21 +10,12 @@ module.exports = {
           use:['babel-loader']       
         },
         {
-          test: /\.css$/,
-          use: [
-            'style-loader',
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true
-              }
-            }
-          ]
+          test: /\.css$/, use: ['style-loader','css-loader']
         }
       ]
     },
     resolve:{
-      extensions:['*', '.js', '.jsx']
+      extensions:['*', '.js', '.jsx', '.css']
     },
     output:{
       path:__dirname + '/dist',
@@ -38,6 +29,7 @@ module.exports = {
       contentBase:'./dist',
       port: 3000,
       publicPath: '/',
-      historyApiFallback: true    
+      historyApiFallback: true,
+      hot:true    
     }
 };
