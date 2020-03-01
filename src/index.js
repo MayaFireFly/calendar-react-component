@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import Calendar from './components/Calendar';
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+ReactDOM.render(<Calendar/>, document.getElementById('root'));
 
-module.hot.accept();
+module.hot.accept();    //development mode only

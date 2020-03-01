@@ -101,11 +101,11 @@ const Calendar = () => {
     <div className='calendar-row calendar-text'>
 
         <div className='calendar-row'>
-            <div onClick={prevMonth} className='clickable w-30'>
+            <div onClick={prevMonth} className='clickable w-20'>
               <span className='arrow arrow-left'></span>
             </div>
-            <div className='w-40'>{textMonth(currentMonth.getMonth())} {currentMonth.getFullYear()}</div>
-            <div onClick={nextMonth} className='clickable w-30'>
+            <div className='w-60'>{textMonth(currentMonth.getMonth())} {currentMonth.getFullYear()}</div>
+            <div onClick={nextMonth} className='clickable w-20'>
               <span className='arrow arrow-right'></span>
             </div> 
         </div> 
